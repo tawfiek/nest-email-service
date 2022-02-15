@@ -9,25 +9,28 @@ export class UsersAuthController {
 
   @MessagePattern('users.create')
   async sendActivationEmail (@Payload() message: any) {
-    const { email, activationUUID } = message.value;
+    try {
+      const { email, activationUUID } = message.value;
 
-    console.log('#DEBUG ', message.value);
+      await this.service.sendVerificationEmail(email, activationUUID);
 
-    await this.service.sendVerificationEmail(email, activationUUID);
-
-    return message.value;
+      return message.value;
+    } catch (e) {
+      throw e;
+    }
   }
 
 
   @MessagePattern('users.activated')
-  sendWelcomeEmail (@Payload() message: any, @Ctx() context: KafkaContext) {
-    const originalMessage = context.getMessage();
-    const response =
-      ` #DEBUG Receiving a new message from topic: medium.rocks: ` + JSON.stringify(message);
+  async sendWelcomeEmail (@Payload() message: any, @Ctx() context: KafkaContext) {
+    try {
+      const { email, firstName } = message.value;
 
-    console.log(response);
-    console.log('#DEBUG ', message);
+      await this.service.sendWelcomeEmail(email, firstName);
 
-    return response;
+      return message.value;
+    } catch (e) {
+      throw e;
+    }
   }
 }

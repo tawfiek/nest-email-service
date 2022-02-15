@@ -20,11 +20,8 @@ export class ServiceService {
 
     constructor () { }
 
-
     async sendVerificationEmail(email: string, token: string): Promise<void> {
         try {
-            console.log('#DEBUG ', email, token);
-            
             const activationURL = `${this.ACTIVATE_URL}/${token}`;
             const message = `
                 Hello, welcome to our service please activate your account using this link:
@@ -38,13 +35,37 @@ export class ServiceService {
                 text: message,
             }
 
-            const result  =await this.mailgunClient.messages.create(this.MAILGUN_DOMAIN, messageData);
-            console.log('#DEBUG ', result);
+            await this.mailgunClient.messages.create(this.MAILGUN_DOMAIN, messageData);
 
         } catch (error) {
             console.error(error);
             throw error;
         }
     }
+
+      async sendWelcomeEmail(email: string, name: string): Promise<void> {
+        try {
+            const message = `
+                Hello ${name}, welcome to our service.
+                Your account has been activated successfully.
+
+                Please login to our system.
+            `;
+
+            const messageData = {
+                from: 'no-reply@dev.com',
+                to: email,
+                subject: 'Account activated',
+                text: message,
+            }
+
+            await this.mailgunClient.messages.create(this.MAILGUN_DOMAIN, messageData);
+
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
 
 }
