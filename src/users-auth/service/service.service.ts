@@ -20,6 +20,7 @@ export class ServiceService {
 
     constructor () { }
 
+    // User mailgun to send activation email to the user.
     async sendVerificationEmail(email: string, token: string): Promise<void> {
         try {
             const activationURL = `${this.ACTIVATE_URL}/${token}`;
@@ -43,7 +44,8 @@ export class ServiceService {
         }
     }
 
-      async sendWelcomeEmail(email: string, name: string): Promise<void> {
+    // User mailgun to send email to the user to confirm that his account has been activated.
+    async sendWelcomeEmail(email: string, name: string): Promise<void> {
         try {
             const message = `
                 Hello ${name}, welcome to our service.
