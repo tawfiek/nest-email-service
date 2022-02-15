@@ -4,6 +4,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersAuthController } from './users-auth/users-auth.controller';
+import { ServiceService } from './users-auth/service/service.service';
 
 @Module({
   imports: [
@@ -24,6 +25,6 @@ import { UsersAuthController } from './users-auth/users-auth.controller';
     ]),
     ConfigModule.forRoot({envFilePath: '.env'}),],
   controllers: [AppController, UsersAuthController],
-  providers: [AppService],
+  providers: [AppService, ServiceService],
 })
 export class AppModule {}
