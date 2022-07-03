@@ -1,7 +1,5 @@
 # Mailer Service
 ## Description
-> This is an auth service application built as an assessment task for Dev Development company.
-As a part of hiring process for a Sr.Software Engineer in Backend position at the same company.
 
 This application acts like an MQTT consumer that connects to a Kafka broker to send emails using Mailgun as an email service.
 ## Application Functionality
