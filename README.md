@@ -4,14 +4,14 @@
 This application acts like an MQTT consumer that connects to a Kafka broker to send emails using Mailgun as an email service.
 ## Application Functionality
 
-This service listen on two topics on Kafka server to send to types of emails, activation email, which will have a link to the auth service to access and activate his email.
+This service listen on two topics on Kafka server to send tow types of emails, activation email, which will have a link to the auth service to access and activate his email.
 
 And a welcoming email that sent to the user as a side effect to the activation process.
 
 ## Dependencies
 
 1. Mailgun:
-  This is an external mailing service that we use for sending emails to the usr.
+  This is an external mailing service that we use for sending emails to the our users.
 
 2. Kafka MQTT broker that should this service connect to.
 
